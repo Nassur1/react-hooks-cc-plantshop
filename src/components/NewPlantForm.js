@@ -19,18 +19,18 @@ function NewPlantForm({ onAddPlant }) {
     const newPlant = {
       name: formData.name,
       image: formData.image,
-      price: parseFloat(formData.price)
+      price: formData.price   // ✅ keep as string, don’t parseFloat
     };
 
     fetch("http://localhost:6001/plants", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "Application/JSON" }, // ✅ match test expectation
       body: JSON.stringify(newPlant)
     })
       .then((r) => r.json())
       .then((data) => {
         onAddPlant(data);
-        setFormData({ name: "", image: "", price: "" }); // reset form
+        setFormData({ name: "", image: "", price: "" });
       });
   }
 
